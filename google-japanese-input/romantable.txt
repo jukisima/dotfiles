@@ -1,0 +1,213 @@
+-	ー
+~	〜
+.	。
+,	、
+!	！
+?	？
+/	・
+[	「
+]	」
+
+a	あ
+i	い
+u	う
+e	え
+o	お
+ja	や
+ju	ゆ
+jo	よ
+
+vu	ゔ
+
+ka	か
+ki	き
+ku	く
+ke	け
+ko	こ
+kja	きゃ
+kju	きゅ
+kjo	きょ
+
+ga	が
+gi	ぎ
+gu	ぐ
+ge	げ
+go	ご
+gja	ぎゃ
+gju	ぎゅ
+gjo	ぎょ
+
+sa	さ
+si	し
+su	す
+se	せ
+so	そ
+sja	しゃ
+sju	しゅ
+sje	しぇ
+sjo	しょ
+
+za	ざ
+zi	じ
+zu	ず
+ze	ぜ
+zo	ぞ
+zja	じゃ
+zju	じゅ
+zje	じぇ
+zjo	じょ
+
+ta	た
+ti	ち
+tu	つ
+te	て
+to	と
+tja	ちゃ
+tju	ちゅ
+tje	ちぇ
+tjo	ちょ
+
+da	だ
+di	ぢ
+du	づ
+de	で
+do	ど
+dja	ぢゃ
+dju	ぢゅ
+dje	ぢぇ
+djo	ぢょ
+
+na	な
+ni	に
+nu	ぬ
+ne	ね
+no	の
+nja	にゃ
+nju	にゅ
+njo	にょ
+
+ha	は
+hi	ひ
+hu	ふ
+he	へ
+ho	ほ
+hja	ひゃ
+hju	ひゅ
+hjo	ひょ
+
+pa	ぱ
+pi	ぴ
+pu	ぷ
+pe	ぺ
+po	ぽ
+pja	ぴゃ
+pju	ぴゅ
+pjo	ぴょ
+
+ba	ば
+bi	び
+bu	ぶ
+be	べ
+bo	ぼ
+bja	びゃ
+bju	びゅ
+bjo	びょ
+
+ma	ま
+mi	み
+mu	む
+me	め
+mo	も
+mja	みゃ
+mju	みゅ
+mjo	みょ
+
+ji	𛀆
+je	𛀁
+
+ra	ら
+ri	り
+ru	る
+re	れ
+ro	ろ
+rja	りゃ
+rju	りゅ
+rjo	りょ
+
+wa	わ
+wi	ゐ
+wu	𛄟
+we	ゑ
+wo	を
+
+la	ぁ
+li	ぃ
+lu	ぅ
+le	ぇ
+lo	ぉ
+lka	ゕ
+lke	ゖ
+lko	𛄲
+ltu	っ
+lja	ゃ
+lju	ゅ
+ljo	ょ
+lwa	ゎ
+lwi	𛅐
+lwe	𛅑
+lwo	𛅒
+
+q	っ
+;	ん
+
+x	や
+y	ゆ
+c	よ
+
+kx	きゃ
+ky	きゅ
+kc	きょ
+
+gx	ぎゃ
+gy	ぎゅ
+gc	ぎょ
+
+sx	しゃ
+sy	しゅ
+sc	しょ
+
+zx	じゃ
+zy	じゅ
+zc	じょ
+
+tx	ちゃ
+ty	ちゅ
+tc	ちょ
+
+dx	ぢゃ
+dy	ぢゅ
+dc	ぢょ
+
+nx	にゃ
+ny	にゅ
+nc	にょ
+
+hx	ひゃ
+hy	ひゅ
+hc	ひょ
+
+px	ぴゃ
+py	ぴゅ
+pc	ぴょ
+
+bx	びゃ
+by	びゅ
+bc	びょ
+
+mx	みゃ
+my	みゅ
+mc	みょ
+
+rx	りゃ
+ry	りゅ
+rc	りょ
