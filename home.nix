@@ -1,4 +1,26 @@
-{ homeDirectory, pkgs, ... }: {
+{ config, homeDirectory, pkgs, ... }:
+let
+  repoRoot =
+    let
+      configuredRepoRoot = builtins.getEnv "DOTFILES_REPO";
+      workingDirectory = builtins.getEnv "PWD";
+      hasFlake = dir: dir != "" && builtins.pathExists "${dir}/flake.nix";
+    in
+    if configuredRepoRoot != "" then
+      configuredRepoRoot
+    else if hasFlake workingDirectory then
+      workingDirectory
+    else
+      throw ''
+        VS Code settings are linked from the working tree.
+        Re-run Home Manager from the repo root or set DOTFILES_REPO=/abs/path/to/repo.
+      '';
+
+  vscodeSettingsPath = "${repoRoot}/config/vscode/settings.json";
+
+  # Keep JSON syntax checked at evaluation time even though the file stays mutable.
+  _validatedVscodeSettings = builtins.fromJSON (builtins.readFile ./config/vscode/settings.json);
+in {
   home.username = builtins.baseNameOf homeDirectory;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "26.05";
@@ -28,7 +50,9 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    profiles.default.userSettings = builtins.fromJSON (builtins.readFile ./config/vscode/settings.json);
+  };
+  programs.helix = {
+    enable = true;
   };
   services.syncthing = {
     enable = true;
@@ -56,10 +80,13 @@
     syncthing
     typst
     warp-terminal
+    zed-editor
   ];
 
   xdg.enable = true;
 
+  home.file."Library/Application Support/Code/User/settings.json".source =
+    config.lib.file.mkOutOfStoreSymlink vscodeSettingsPath;
   home.file.".warp/settings.toml".source = ./config/warp/settings.toml;
   xdg.configFile."nix-dots/example.conf".source = ./config/nix-dots/example.conf;
   xdg.configFile."starship.toml".text = ''

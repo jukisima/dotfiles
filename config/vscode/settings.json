@@ -183,7 +183,7 @@
     "editor.defaultFormatter": "mvakula.vscode-purty"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "[jade]": {
     "editor.defaultFormatter": "ducfilan.pug-formatter"

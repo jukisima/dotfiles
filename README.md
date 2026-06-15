@@ -52,8 +52,10 @@ Nix をまだ知らない前提で、最初の 1 歩だけに絞った雛形で�
 - `ripgrep` を入れる
 - `starship` を入れて zsh に組み込む
 - `vscode` と `codex` を入れる
+- `helix` を Home Manager で管理する
+- `zed-editor` を入れる
 - `google-chrome` を入れる
-- VS Code を `programs.vscode` で管理し、`config/vscode/settings.json` を反映する
+- VS Code 本体を `programs.vscode` で管理し、`config/vscode/settings.json` を macOS の user settings にリンクする
 - Warp の `settings.toml` を `~/.warp/settings.toml` として管理する
 - `syncthing` を入れて、自動起動する service として有効化する
 - `typst` と `jdk` を入れる
@@ -95,7 +97,7 @@ home.packages = with pkgs; [
 ];
 ```
 
-VS Code 自体は `home.packages` ではなく `programs.vscode` で管理しています。
+VS Code 自体は `home.packages` ではなく `programs.vscode` で管理しています。`settings.json` は `~/Library/Application Support/Code/User/settings.json` から repo の `config/vscode/settings.json` へリンクしているので、VS Code から編集した内容も repo 側にそのまま反映されます。
 
 ### dotfile を増やす
 
@@ -109,7 +111,8 @@ xdg.configFile."git/ignore".source = ./config/git/ignore;
 
 - `home.stateVersion = "26.05";` は最初に作った世代の互換性用です。普段はむやみに変えません。
 - `programs.git.enable = true;` と `programs.zsh.enable = true;` を使っているので、既存の `~/.gitconfig` と `~/.zshrc` がある場合は初回反映時に衝突します。README の最初のコマンドのように `-b backup` を付けると退避しながら反映できます。
-- VS Code の既存 `settings.json` がある場合は、初回反映後に Home Manager 管理版へ置き換わります。
+- VS Code の既存 `settings.json` がある場合は、初回反映後に repo の `config/vscode/settings.json` へのリンクへ置き換わります。
+- VS Code の設定リンク先は `DOTFILES_REPO` を優先し、未設定なら `home-manager switch` を実行したときの `PWD` を使います。普段どおり repo 直下で `home-manager switch --impure --flake path:.#default` を実行すれば問題ありません。repo 外から `path:/abs/path#default` で反映する場合は、あわせて `DOTFILES_REPO=/abs/path/to/repo` を渡してください。
 - Warp の既存 `~/.warp/settings.toml` がある場合も、初回反映後に Home Manager 管理版へ置き換わります。
 - `services.syncthing.enable = true;` により、macOS では Home Manager が `launchd` agent を作って Syncthing を自動起動します。
 - `vscode`、`antigravity`、`antigravity-cli` は unfree パッケージなので、この雛形では `flake.nix` でそのパッケージだけ個別に許可しています。
