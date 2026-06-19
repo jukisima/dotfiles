@@ -42,7 +42,6 @@
         ];
         config.allowUnfreePredicate = pkg:
           builtins.elem (lib.getName pkg) [
-            "antigravity"
             "antigravity-cli"
             "google-chrome"
             "vscode"

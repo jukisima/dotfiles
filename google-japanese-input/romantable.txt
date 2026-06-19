@@ -7,6 +7,7 @@
 /	・
 [	「
 ]	」
+rectangle	▭
 
 a	あ
 i	い
@@ -17,7 +18,14 @@ ja	や
 ju	ゆ
 jo	よ
 
+va	ゔぁ
+vi	ゔぃ
 vu	ゔ
+ve	ゔぇ
+vo	ゔぉ
+vja	ゔゃ
+vju	ゔゅ
+vjo	ゔょ
 
 ka	か
 ki	き
@@ -113,6 +121,14 @@ bja	びゃ
 bju	びゅ
 bjo	びょ
 
+fa	ふぁ
+fi	ふぃ
+fe	ふぇ
+fo	ふぉ
+fja	ふゃ
+fju	ふゅ
+fjo	ふょ
+
 ma	ま
 mi	み
 mu	む
@@ -140,74 +156,22 @@ wu	𛄟
 we	ゑ
 wo	を
 
-la	ぁ
-li	ぃ
-lu	ぅ
-le	ぇ
-lo	ぉ
-lka	ゕ
-lke	ゖ
-lko	𛄲
-ltu	っ
-lja	ゃ
-lju	ゅ
-ljo	ょ
-lwa	ゎ
-lwi	𛅐
-lwe	𛅑
-lwo	𛅒
+;a	ぁ
+;i	ぃ
+;u	ぅ
+;e	ぇ
+;o	ぉ
+;ka	ゕ
+;ke	ゖ
+;ko	𛄲
+;tu	っ
+;ja	ゃ
+;ju	ゅ
+;jo	ょ
+;wa	ゎ
+;wi	𛅐
+;we	𛅑
+;wo	𛅒
 
 q	っ
-;	ん
-
-x	や
-y	ゆ
-c	よ
-
-kx	きゃ
-ky	きゅ
-kc	きょ
-
-gx	ぎゃ
-gy	ぎゅ
-gc	ぎょ
-
-sx	しゃ
-sy	しゅ
-sc	しょ
-
-zx	じゃ
-zy	じゅ
-zc	じょ
-
-tx	ちゃ
-ty	ちゅ
-tc	ちょ
-
-dx	ぢゃ
-dy	ぢゅ
-dc	ぢょ
-
-nx	にゃ
-ny	にゅ
-nc	にょ
-
-hx	ひゃ
-hy	ひゅ
-hc	ひょ
-
-px	ぴゃ
-py	ぴゅ
-pc	ぴょ
-
-bx	びゃ
-by	びゅ
-bc	びょ
-
-mx	みゃ
-my	みゅ
-mc	みょ
-
-rx	りゃ
-ry	りゅ
-rc	りょ
+l	ん

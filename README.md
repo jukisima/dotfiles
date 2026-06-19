@@ -59,7 +59,6 @@ Nix をまだ知らない前提で、最初の 1 歩だけに絞った雛形で�
 - Warp の `settings.toml` を `~/.warp/settings.toml` として管理する
 - `syncthing` を入れて、自動起動する service として有効化する
 - `typst` と `jdk` を入れる
-- `antigravity` を入れる
 - `antigravity-cli` を入れる
 - `mystmd` を入れる
 - `devenv` を入れる
@@ -80,7 +79,6 @@ Nix をまだ知らない前提で、最初の 1 歩だけに絞った雛形で�
 
 ```nix
 home.packages = with pkgs; [
-  antigravity
   antigravity-cli
   codex
   devenv
@@ -115,7 +113,7 @@ xdg.configFile."git/ignore".source = ./config/git/ignore;
 - VS Code の設定リンク先は `DOTFILES_REPO` を優先し、未設定なら `home-manager switch` を実行したときの `PWD` を使います。普段どおり repo 直下で `home-manager switch --impure --flake path:.#default` を実行すれば問題ありません。repo 外から `path:/abs/path#default` で反映する場合は、あわせて `DOTFILES_REPO=/abs/path/to/repo` を渡してください。
 - Warp の既存 `~/.warp/settings.toml` がある場合も、初回反映後に Home Manager 管理版へ置き換わります。
 - `services.syncthing.enable = true;` により、macOS では Home Manager が `launchd` agent を作って Syncthing を自動起動します。
-- `vscode`、`antigravity`、`antigravity-cli` は unfree パッケージなので、この雛形では `flake.nix` でそのパッケージだけ個別に許可しています。
+- `vscode` と `antigravity-cli` は unfree パッケージなので、この雛形では `flake.nix` でそのパッケージだけ個別に許可しています。
 - `google-chrome` も unfree パッケージなので、この repo では `flake.nix` の `allowUnfreePredicate` に個別追加しています。
 - `warp-terminal` も unfree です。この repo では Darwin 向けに `7zz` を使う local overlay で APFS DMG 展開を補っています。
 - この雛形は `aarch64-darwin` を前提にしています。`homeDirectory` は固定値ではなく、実行時の `HOME` から読み取り、`username` はその basename から導出します。

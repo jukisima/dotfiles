@@ -222,5 +222,6 @@
   },
   "[flix]": {
     "editor.defaultFormatter": "flix.flix"
-  }
+  },
+  "deno.enable": true
 }

@@ -61,9 +61,9 @@ in {
   home.packages = with pkgs; [
     alegreya
     alcarin-tengwar
-    antigravity
     antigravity-cli
     codex
+    deno
     devenv
     fdupes
     fira-code
