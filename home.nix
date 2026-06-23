@@ -58,6 +58,11 @@ in {
     enable = true;
   };
 
+  home.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+  };
+
   home.packages = with pkgs; [
     alegreya
     alcarin-tengwar
@@ -66,12 +71,11 @@ in {
     deno
     devenv
     fdupes
-    fira-code
     google-chrome
-    hack-font
     jdk
     lxgw-wenkai-tc
     mystmd
+    nodejs
     nerd-fonts.jetbrains-mono
     ripgrep
     rsync

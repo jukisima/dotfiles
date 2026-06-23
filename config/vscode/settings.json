@@ -66,7 +66,7 @@
     "%DOCFILE%.nav",
     "%DOCFILE%.vrb"
   ],
-  "editor.fontFamily": "Fira Code, 'Noto Sans Mono', 'Noto Sans TC', 'Noto Kufi Arabic', Unifont, monospace",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans Mono', 'Noto Sans TC', Unifont, monospace",
   "liveServer.settings.donotVerifyTags": true,
   "latex-workshop.latex.build.clearLog.everyRecipeStep.enabled": false,
   "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
@@ -100,7 +100,7 @@
     "(alive/server:start)"
   ],
   "[typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "[latex]": {
     "editor.defaultFormatter": "James-Yu.latex-workshop"
@@ -210,7 +210,7 @@
   "oxc.typeAware": true,
   "claudeCode.preferredLocation": "panel",
   "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "http.systemCertificatesNode": true,
   "terminal.integrated.commandsToSkipShell": [
