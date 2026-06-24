@@ -5,11 +5,7 @@ set -euo pipefail
 readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly BREWFILE="${SCRIPT_DIR}/Brewfile"
 readonly MISE_CONFIG_FILE="${SCRIPT_DIR}/mise.toml"
-readonly USER_FONT_DIR="${HOME}/Library/Fonts"
 readonly BACKUP_SUFFIX="$(date +%Y%m%d%H%M%S)"
-readonly ALEGREYA_ARCHIVE_URL="https://github.com/huertatipografica/Alegreya/archive/refs/tags/v2.008.tar.gz"
-readonly ALCARIN_TENGWAR_ARCHIVE_URL="https://github.com/Tosche/Alcarin-Tengwar/archive/a4530d430ea01871b0b0a54d1de218d2ffde0ea5.tar.gz"
-readonly LIBERTINUS_ARCHIVE_URL="https://github.com/alerque/libertinus/releases/download/v7.051/Libertinus-7.051.tar.zst"
 
 log() {
 	printf '==> %s\n' "$*"
@@ -185,52 +181,6 @@ apply_dotfiles() {
 	MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
 }
 
-extract_archive() {
-	local archive_path="$1"
-	local target_dir="$2"
-
-	case "${archive_path}" in
-	*.tar.gz)
-		tar -xzf "${archive_path}" -C "${target_dir}"
-		;;
-	*.tar.zst)
-		tar --use-compress-program=unzstd -xf "${archive_path}" -C "${target_dir}"
-		;;
-	*)
-		die "Unsupported archive format: ${archive_path}"
-		;;
-	esac
-}
-
-install_fonts_from_archive() {
-	local family="$1"
-	local archive_url="$2"
-	local name_pattern="$3"
-	local archive_name="$4"
-	local tmpdir installed=0
-
-	log "Installing ${family} fonts"
-	mkdir -p "${USER_FONT_DIR}"
-	tmpdir="$(mktemp -d)"
-	curl -fsSL "${archive_url}" -o "${tmpdir}/${archive_name}"
-	extract_archive "${tmpdir}/${archive_name}" "${tmpdir}"
-
-	while IFS= read -r -d '' font_file; do
-		install -m 644 "${font_file}" "${USER_FONT_DIR}/$(basename "${font_file}")"
-		installed=1
-	done < <(find "${tmpdir}" -type f \( -name "${name_pattern}*.ttf" -o -name "${name_pattern}*.otf" \) -print0)
-
-	rm -rf "${tmpdir}"
-
-	((installed == 1)) || die "No ${family} font files matching ${name_pattern}* were found in ${archive_url}"
-}
-
-install_manual_fonts() {
-	install_fonts_from_archive "Alegreya" "${ALEGREYA_ARCHIVE_URL}" "Alegreya" "alegreya.tar.gz"
-	install_fonts_from_archive "Alcarin Tengwar" "${ALCARIN_TENGWAR_ARCHIVE_URL}" "AlcarinTengwar" "alcarin-tengwar.tar.gz"
-	install_fonts_from_archive "Libertinus" "${LIBERTINUS_ARCHIVE_URL}" "Libertinus" "libertinus.tar.zst"
-}
-
 start_syncthing() {
 	log "Starting Syncthing with brew services"
 	brew services start syncthing >/dev/null
@@ -248,7 +198,6 @@ main() {
 	install_mise_tools
 	backup_existing_dotfiles
 	apply_dotfiles
-	install_manual_fonts
 	start_syncthing
 
 	log "Done"

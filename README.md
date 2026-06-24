@@ -30,7 +30,6 @@
 - `mise.toml` を trust して `mise install` を実行する
 - `mise dotfiles apply` で repo-managed dotfiles を symlink する
 - dotfiles 競合時は `*.backup-YYYYMMDDHHMMSS` へ退避する
-- `Alegreya`、`Alcarin Tengwar`、`Libertinus` を `~/Library/Fonts` に入れる
 - `brew services start syncthing` で Syncthing を自動起動する
 
 ## Re-apply
@@ -52,11 +51,9 @@ brew services start syncthing
   `syncthing`、`typst`、`zoxide` と zsh plugin 用 formula を入れる
 - Homebrew で `mise` を入れる
 - Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、`zed` を入れる
-- Homebrew cask で `JetBrains Mono Nerd Font` と `LXGW WenKai TC` を入れる
+- Homebrew cask で `Alegreya`、`JetBrains Mono Nerd Font`、`Libertinus Math`、`LXGW WenKai TC`、`Shippori Mincho` を入れる
 - `mise` で `deno`、`java`、`node`、`mystmd` を入れる
 - repo の `config/` 配下を `mise dotfiles` でホームディレクトリへ symlink する
-- `Alegreya`、`Alcarin Tengwar`、`Libertinus` は upstream archive から
-  `~/Library/Fonts` へ入れる
 - `~/.gitconfig` で `init.defaultBranch = main` を設定する
 - zsh では `mise activate`、`zoxide`、`starship`、completion、
   autosuggestion、syntax highlighting、history substring search を有効化する
