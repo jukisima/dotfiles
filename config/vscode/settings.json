@@ -159,12 +159,6 @@
   "diffEditor.experimental.showMoves": true,
   "terminal.integrated.fontFamily": "MesloLGS NF",
   "diffEditor.codeLens": true,
-  "calva.prettyPrintingOptions": {
-    "printEngine": "pprint",
-    "enabled": true,
-    "width": 120,
-    "maxLength": 50
-  },
   "workbench.editorAssociations": {
     "*.svg": "default"
   },

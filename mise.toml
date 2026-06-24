@@ -1,0 +1,18 @@
+min_version = "2026.6.13"
+
+[settings]
+dotfiles.default_mode = "symlink"
+
+[tools]
+deno = "2"
+java = "temurin-21"
+node = "lts"
+"npm:mystmd" = { version = "latest", depends = "node" }
+
+[dotfiles]
+"~/.gitconfig" = { source = "config/git/.gitconfig", mode = "symlink" }
+"~/.zprofile" = { source = "config/zsh/.zprofile", mode = "symlink" }
+"~/.zshrc" = { source = "config/zsh/.zshrc", mode = "symlink" }
+"~/.config/starship.toml" = { source = "config/starship.toml", mode = "symlink" }
+"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json", mode = "symlink" }
+"~/.warp/settings.toml" = { source = "config/warp/settings.toml", mode = "symlink" }

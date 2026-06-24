@@ -1,147 +1,116 @@
 # dotfiles
 
-この構成は `home-manager` の standalone 版です。macOS 全体を触る `nix-darwin`
-はまだ使わず、まずは「自分のホームディレクトリに dotfiles と CLI
-ツールを入れる」ことだけをやります。
+この構成は macOS 向けの standalone な dotfiles です。Nix / Home Manager
+ではなく、Homebrew と `mise` を使ってツール導入と設定反映を行います。
 
 ## Files
 
-- `flake.nix`: Nix の入口
-- `home.nix`: 普段いじる設定
+- `setup.sh`: 初期セットアップと再反映
+- `Brewfile`: Homebrew で入れる formula / cask
+- `mise.toml`: `mise` で入れる version-managed tools と dotfiles 定義
+- `config/zsh/.zprofile`: Homebrew と `~/.local/bin` の PATH
+- `config/zsh/.zshrc`: zsh の共通設定
+- `config/starship.toml`: starship 設定
 - `config/vscode/settings.json`: VS Code の user settings
-- `config/nix-dots/example.conf`: repo に置いたまま配るサンプル dotfile
+- `config/warp/settings.toml`: Warp の settings
+- `config/dotfiles/example.conf`: repo に置いたまま配るサンプル dotfile
 
 ## Bootstrap
 
 新しいマシンでは、この repo を clone したあとにまず次を実行します。
 
 ```bash
-./bootstrap.sh
+./setup.sh
 ```
 
 このスクリプトは次をやります。
 
-- Nix が未導入なら公式 macOS installer で入れる
-- `~/.config/nix/nix.conf` で `nix-command` と `flakes` を有効化する
-- Home Manager を `-b backup` 付きで反映する
+- Homebrew が未導入なら公式 installer で入れる
+- `Brewfile` の formula / cask を入れる
+- `mise.toml` を trust して `mise install` を実行する
+- `mise dotfiles apply` で repo-managed dotfiles を symlink する
+- dotfiles 競合時は `*.backup-YYYYMMDDHHMMSS` へ退避する
+- `Alegreya`、`Alcarin Tengwar`、`Libertinus` を `~/Library/Fonts` に入れる
+- `brew services start syncthing` で Syncthing を自動起動する
 
-## First run
+## Re-apply
 
-1. flakes を有効化する
+2 回目以降も `./setup.sh` で再反映できます。
 
-   `~/.config/nix/nix.conf` に次を入れます。
+より短い日常運用なら次でも十分です。
 
-   ```conf
-   experimental-features = nix-command flakes
-   ```
+```bash
+brew bundle
+mise install
+MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
+brew services start syncthing
+```
 
-2. この repo で最初の反映をする
+## What this setup does
 
-   ```bash
-   nix run github:nix-community/home-manager/release-26.05 -- switch -b backup --impure --flake path:.#default
-   ```
-
-3. 2 回目以降はこれで反映できます
-
-   ```bash
-   home-manager switch --impure --flake path:.#default
-   ```
-
-## What this template does
-
-- `ripgrep` を入れる
-- `starship` を入れて zsh に組み込む
-- `vscode` と `codex` を入れる
-- `helix` を Home Manager で管理する
-- `zed-editor` を入れる
-- `google-chrome` を入れる
-- VS Code 本体を `programs.vscode` で管理し、`config/vscode/settings.json` を
-  macOS の user settings にリンクする
-- Warp の `settings.toml` を `~/.warp/settings.toml` として管理する
-- `syncthing` を入れて、自動起動する service として有効化する
-- `typst` と `jdk` を入れる
-- `nodejs` を入れる
-- `antigravity-cli` を入れる
-- `mystmd` を入れる
-- `devenv` を入れる
-- `fdupes` と `rsync` を入れる
-- `shfmt` を入れる
-- `warp-terminal` を入れる
-- `JetBrainsMono Nerd Font` を入れる
-- `Alegreya`、`Alcarin Tengwar`、`LXGW WenKai TC` を入れる
-- `git` と `zshrc` を Home Manager で管理する
+- Homebrew で `fdupes`、`helix`、`ripgrep`、`rsync`、`shfmt`、`starship`、
+  `syncthing`、`typst`、`zoxide` と zsh plugin 用 formula を入れる
+- Homebrew で `mise` を入れる
+- Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、`zed` を入れる
+- Homebrew cask で `JetBrains Mono Nerd Font` と `LXGW WenKai TC` を入れる
+- `mise` で `deno`、`java`、`node`、`mystmd` を入れる
+- repo の `config/` 配下を `mise dotfiles` でホームディレクトリへ symlink する
+- `Alegreya`、`Alcarin Tengwar`、`Libertinus` は upstream archive から
+  `~/Library/Fonts` へ入れる
+- `~/.gitconfig` で `init.defaultBranch = main` を設定する
+- zsh では `mise activate`、`zoxide`、`starship`、completion、
+  autosuggestion、syntax highlighting、history substring search を有効化する
 - `EDITOR` と `VISUAL` を `hx` に設定する
-- zsh plugin 管理は `antidote` ではなく Home Manager 標準の zsh / zoxide
-  オプションに寄せる
-- `config/nix-dots/example.conf` を `~/.config/nix-dots/example.conf`
-  にリンクする
 
 ## First edits
 
-最初は `home.nix` だけ触れば十分です。
+最初は `Brewfile`、`mise.toml`、`config/` を触れば十分です。
 
 ### Package を増やす
 
-```nix
-home.packages = with pkgs; [
-  antigravity-cli
-  codex
-  devenv
-  fdupes
-  jdk
-  mystmd
-  ripgrep
-  rsync
-  starship
-  fd
-  jq
-  syncthing
-  typst
-];
-```
+- global app / system package を増やすなら `Brewfile` を更新する
+- version-managed tool を増やすなら `mise.toml` の `[tools]` を更新する
 
-VS Code 自体は `home.packages` ではなく `programs.vscode`
-で管理しています。`settings.json` は
-`~/Library/Application Support/Code/User/settings.json` から repo の
-`config/vscode/settings.json` へリンクしているので、VS Code から編集した内容も
-repo 側にそのまま反映されます。
+例:
+
+```toml
+[tools]
+deno = "2"
+node = "lts"
+python = "3.13"
+```
 
 ### dotfile を増やす
 
-```nix
-xdg.configFile."git/ignore".source = ./config/git/ignore;
-```
+`config/` 配下にファイルを追加して、`mise.toml` の `[dotfiles]` に target と
+source を足します。
 
-すると repo 内の `config/git/ignore` が `~/.config/git/ignore` に配置されます。
+たとえば:
+
+```toml
+[dotfiles]
+"~/.config/git/ignore" = { source = "config/git/ignore", mode = "symlink" }
+```
 
 ## Notes
 
-- `home.stateVersion = "26.05";`
-  は最初に作った世代の互換性用です。普段はむやみに変えません。
-- `programs.git.enable = true;` と `programs.zsh.enable = true;`
-  を使っているので、既存の `~/.gitconfig` と `~/.zshrc`
-  がある場合は初回反映時に衝突します。README の最初のコマンドのように
-  `-b backup` を付けると退避しながら反映できます。
-- VS Code の既存 `settings.json` がある場合は、初回反映後に repo の
-  `config/vscode/settings.json` へのリンクへ置き換わります。
-- VS Code の設定リンク先は `DOTFILES_REPO` を優先し、未設定なら
-  `home-manager switch` を実行したときの `PWD` を使います。普段どおり repo
-  直下で `home-manager switch --impure --flake path:.#default`
-  を実行すれば問題ありません。repo 外から `path:/abs/path#default`
-  で反映する場合は、あわせて `DOTFILES_REPO=/abs/path/to/repo`
-  を渡してください。
-- Warp の既存 `~/.warp/settings.toml` がある場合も、初回反映後に Home Manager
-  管理版へ置き換わります。
-- `services.syncthing.enable = true;` により、macOS では Home Manager が
-  `launchd` agent を作って Syncthing を自動起動します。
-- `vscode` と `antigravity-cli` は unfree パッケージなので、この雛形では
-  `flake.nix` でそのパッケージだけ個別に許可しています。
-- `google-chrome` も unfree パッケージなので、この repo では `flake.nix` の
-  `allowUnfreePredicate` に個別追加しています。
-- `warp-terminal` も unfree です。この repo では Darwin 向けに `7zz` を使う
-  local overlay で APFS DMG 展開を補っています。
-- この雛形は `aarch64-darwin` を前提にしています。`homeDirectory`
-  は固定値ではなく、実行時の `HOME` から読み取り、`username` はその basename
-  から導出します。
-- そのため、flake を直接使うコマンドには `--impure` が必要です。
-- Intel Mac で使うなら、まず `flake.nix` の `system` を直してください。
+- `mise` 自身は空のマシンでは自分自身を入れられないので、初回だけ
+  Homebrew 経由で入れます
+- Homebrew 配下の所有者がずれているマシンでは `brew bundle` が失敗します。
+  その場合は `setup.sh` が表示する `sudo chown -R ...` を一度実行してください
+- 一部の Homebrew package / cask が失敗しても、`setup.sh` は残りの設定適用を続行します
+- `mise trust` が必要なのは、この repo の `mise.toml` が `[dotfiles]` を使うためです
+- `mise dotfiles` は experimental なので、この repo では `MISE_EXPERIMENTAL=1`
+  を付けて実行します
+- `mise dotfiles` は symlink モードで使っているので、VS Code や Warp からの編集も
+  repo 側にそのまま反映されます
+- この repo は `aarch64-darwin` / Apple Silicon を前提にしています
+
+## Verification
+
+setup 変更後は次を実行します。
+
+```bash
+shfmt -w setup.sh
+bash -n setup.sh
+```
