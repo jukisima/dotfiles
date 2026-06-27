@@ -33,6 +33,9 @@ show_conversation_history = true
 [agents.third_party]
 should_render_cli_agent_toolbar = true
 
+[agents.profiles]
+agent_mode_coding_permissions = "always_allow_reading"
+
 [account]
 is_settings_sync_enabled = true
 

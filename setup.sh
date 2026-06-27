@@ -16,22 +16,8 @@ die() {
 	exit 1
 }
 
-assert_supported_machine() {
-	local os arch
-	os="$(uname -s)"
-	arch="$(uname -m)"
-
-	[[ "$os" == "Darwin" ]] || die "This bootstrap currently supports macOS only."
-	[[ "$arch" == "arm64" ]] || die "This bootstrap is currently pinned for arm64 Macs."
-	[[ -n "${USER:-}" ]] || die "USER is not set."
-	[[ -n "${HOME:-}" ]] || die "HOME is not set."
-}
-
-ensure_repo_root() {
-	[[ -f "${BREWFILE}" ]] || die "Brewfile was not found next to setup.sh"
-	[[ -f "${MISE_CONFIG_FILE}" ]] || die "mise.toml was not found next to setup.sh"
-	[[ -f "${SCRIPT_DIR}/config/vscode/settings.json" ]] || die "VS Code settings were not found in config/vscode"
-	[[ -f "${SCRIPT_DIR}/config/warp/settings.toml" ]] || die "Warp settings were not found in config/warp"
+ensure_macos() {
+	[[ "$(uname -s)" == "Darwin" ]] || die "this bootstrap currently supports macOS only."
 }
 
 install_homebrew() {
@@ -39,77 +25,20 @@ install_homebrew() {
 		return
 	fi
 
-	command -v curl >/dev/null 2>&1 || die "curl is required to install Homebrew."
+	command -v curl >/dev/null 2>&1 || die "curl is required to install homebrew."
 
-	log "Installing Homebrew"
+	log "installing homebrew"
 	NONINTERACTIVE=1 /bin/bash -c \
 		"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 source_homebrew() {
-	if [[ -x /opt/homebrew/bin/brew ]]; then
-		eval "$(/opt/homebrew/bin/brew shellenv)"
-	elif [[ -x /usr/local/bin/brew ]]; then
-		eval "$(/usr/local/bin/brew shellenv)"
-	fi
-
-	command -v brew >/dev/null 2>&1 || die "Homebrew is still not available in PATH. Open a new shell and rerun setup.sh."
-}
-
-ensure_homebrew_writable() {
-	local brew_prefix
-	local -a required_paths unwritable_paths
-
-	brew_prefix="$(brew --prefix)"
-	required_paths=(
-		"${HOME}/Library/Caches/Homebrew"
-		"${HOME}/Library/Logs/Homebrew"
-		"${brew_prefix}"
-		"${brew_prefix}/Cellar"
-		"${brew_prefix}/Frameworks"
-		"${brew_prefix}/bin"
-		"${brew_prefix}/etc"
-		"${brew_prefix}/etc/bash_completion.d"
-		"${brew_prefix}/include"
-		"${brew_prefix}/lib"
-		"${brew_prefix}/lib/pkgconfig"
-		"${brew_prefix}/opt"
-		"${brew_prefix}/sbin"
-		"${brew_prefix}/share"
-		"${brew_prefix}/share/doc"
-		"${brew_prefix}/share/man"
-		"${brew_prefix}/share/man/man1"
-		"${brew_prefix}/share/man/man3"
-		"${brew_prefix}/share/man/man5"
-		"${brew_prefix}/share/man/man7"
-		"${brew_prefix}/share/zsh"
-		"${brew_prefix}/share/zsh/site-functions"
-		"${brew_prefix}/var/homebrew/linked"
-		"${brew_prefix}/var/homebrew/locks"
-		"${brew_prefix}/var/log"
-	)
-
-	for path in "${required_paths[@]}"; do
-		if [[ -e "${path}" ]]; then
-			[[ -w "${path}" ]] || unwritable_paths+=("${path}")
-		else
-			local parent_dir
-			parent_dir="$(dirname "${path}")"
-			[[ -w "${parent_dir}" ]] || unwritable_paths+=("${path}")
-		fi
-	done
-
-	((${#unwritable_paths[@]} == 0)) && return
-
-	printf 'error: Homebrew is installed but some required paths are not writable by %s.\n' "${USER}" >&2
-	printf 'Fix it with:\n' >&2
-	printf '  sudo chown -R %s %s\n' "${USER}" "${unwritable_paths[*]}" >&2
-	printf '  chmod u+w %s\n' "${unwritable_paths[*]}" >&2
-	exit 1
+	[[ -x /opt/homebrew/bin/brew ]] || die "homebrew was installed, but /opt/homebrew/bin/brew is not available."
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 install_brew_packages() {
-	log "Installing Homebrew packages"
+	log "installing homebrew packages"
 	if brew bundle --file "${BREWFILE}"; then
 		return
 	fi
@@ -122,7 +51,7 @@ backup_path() {
 	local target="$1"
 	local backup="${target}.backup-${BACKUP_SUFFIX}"
 
-	log "Backing up ${target} to ${backup}"
+	log "backing up ${target} to ${backup}"
 	mv "$target" "$backup"
 }
 
@@ -156,7 +85,7 @@ backup_dotfile_if_needed() {
 }
 
 backup_existing_dotfiles() {
-	log "Backing up conflicting dotfiles before applying symlinks"
+	log "backing up conflicting dotfiles before applying symlinks"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/git/.gitconfig" "${HOME}/.gitconfig"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zprofile" "${HOME}/.zprofile"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zshrc" "${HOME}/.zshrc"
@@ -167,32 +96,30 @@ backup_existing_dotfiles() {
 }
 
 trust_mise_config() {
-	log "Trusting ${MISE_CONFIG_FILE}"
+	log "trusting ${MISE_CONFIG_FILE}"
 	mise trust "${MISE_CONFIG_FILE}"
 }
 
 install_mise_tools() {
-	log "Installing mise-managed tools"
+	log "installing mise-managed tools"
 	mise install
 }
 
 apply_dotfiles() {
-	log "Applying repo-managed dotfiles"
+	log "applying repo-managed dotfiles"
 	MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
 }
 
 start_syncthing() {
-	log "Starting Syncthing with brew services"
+	log "starting syncthing with brew services"
 	brew services start syncthing >/dev/null
 }
 
 main() {
-	assert_supported_machine
-	ensure_repo_root
+	ensure_macos
 	cd "${SCRIPT_DIR}"
 	install_homebrew
 	source_homebrew
-	ensure_homebrew_writable
 	install_brew_packages
 	trust_mise_config
 	install_mise_tools
@@ -200,8 +127,8 @@ main() {
 	apply_dotfiles
 	start_syncthing
 
-	log "Done"
-	log "Open a new shell to pick up Homebrew and mise shell integration."
+	log "done"
+	log "open a new shell to pick up homebrew and mise shell integration."
 }
 
 main "$@"

@@ -4,9 +4,9 @@ min_version = "2026.6.13"
 dotfiles.default_mode = "symlink"
 
 [tools]
-deno = "2"
-java = "temurin-21"
-node = "lts"
+deno = "latest"
+java = "latest"
+node = "latest"
 "npm:mystmd" = { version = "latest", depends = "node" }
 
 [dotfiles]
