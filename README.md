@@ -7,7 +7,8 @@
 
 - `setup.sh`: 初期セットアップと再反映
 - `Brewfile`: Homebrew で入れる formula / cask
-- `mise.toml`: `mise` で入れる version-managed tools と dotfiles 定義
+- `mise.toml`: `mise dotfiles` 用の dotfiles 定義
+- `config/mise/config.toml`: global に使う `mise` の tools 定義
 - `config/zsh/.zprofile`: Homebrew と `~/.local/bin` の PATH
 - `config/zsh/.zshrc`: zsh の共通設定
 - `config/starship.toml`: starship 設定
@@ -27,8 +28,10 @@
 
 - Homebrew が未導入なら公式 installer で入れる
 - `Brewfile` の formula / cask を入れる
-- `mise.toml` を trust して `mise install` を実行する
+- `mise.toml` を trust する
 - `mise dotfiles apply` で repo-managed dotfiles を symlink する
+- `config/mise/config.toml` を `~/.config/mise/config.toml` として反映する
+- `mise install` を実行する
 - dotfiles 競合時は `*.backup-YYYYMMDDHHMMSS` へ退避する
 - `brew services start syncthing` で Syncthing を自動起動する
 
@@ -40,8 +43,8 @@
 
 ```bash
 brew bundle
-mise install
 MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
+mise install
 brew services start syncthing
 ```
 
@@ -52,7 +55,8 @@ brew services start syncthing
 - Homebrew で `mise` を入れる
 - Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、`zed` を入れる
 - Homebrew cask で `Alegreya`、`JetBrains Mono Nerd Font`、`Libertinus Math`、`LXGW WenKai TC`、`Noto Serif Hentaigana`、`Shippori Mincho` を入れる
-- `mise` で `deno`、`java`、`node`、`mystmd` を入れる
+- `config/mise/config.toml` の global tool 設定で `deno`、`java`、`node`、
+  `purescript`、`mystmd`、`purty`、`spago` を使えるようにする
 - repo の `config/` 配下を `mise dotfiles` でホームディレクトリへ symlink する
 - `~/.gitconfig` で `init.defaultBranch = main` を設定する
 - zsh では `mise activate`、`zoxide`、`starship`、completion、
@@ -66,7 +70,8 @@ brew services start syncthing
 ### package を増やす
 
 - global app / system package を増やすなら `Brewfile` を更新する
-- version-managed tool を増やすなら `mise.toml` の `[tools]` を更新する
+- global な version-managed tool を増やすなら `config/mise/config.toml` の `[tools]`
+  を更新する
 
 例:
 
@@ -97,6 +102,8 @@ source を足します。
 - `mise trust` が必要なのは、この repo の `mise.toml` が `[dotfiles]` を使うためです
 - `mise dotfiles` は experimental なので、この repo では `MISE_EXPERIMENTAL=1`
   を付けて実行します
+- `config/mise/config.toml` は `~/.config/mise/config.toml` に symlink されるので、
+  repo の外でも同じ `mise` tool 設定を使えます
 - `mise dotfiles` は symlink モードで使っているので、VS Code や Warp からの編集も
   repo 側にそのまま反映されます
 - この repo / `setup.sh` は apple silicon macOS での利用を前提にしていて、

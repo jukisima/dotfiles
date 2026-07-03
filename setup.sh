@@ -89,6 +89,7 @@ backup_existing_dotfiles() {
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/git/.gitconfig" "${HOME}/.gitconfig"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zprofile" "${HOME}/.zprofile"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zshrc" "${HOME}/.zshrc"
+	backup_dotfile_if_needed "${SCRIPT_DIR}/config/mise/config.toml" "${HOME}/.config/mise/config.toml"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/starship.toml" "${HOME}/.config/starship.toml"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/warp/settings.toml" "${HOME}/.warp/settings.toml"
@@ -122,9 +123,9 @@ main() {
 	source_homebrew
 	install_brew_packages
 	trust_mise_config
-	install_mise_tools
 	backup_existing_dotfiles
 	apply_dotfiles
+	install_mise_tools
 	start_syncthing
 
 	log "done"

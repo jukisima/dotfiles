@@ -117,7 +117,7 @@
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "[html]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
