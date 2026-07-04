@@ -93,7 +93,6 @@ backup_existing_dotfiles() {
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/starship.toml" "${HOME}/.config/starship.toml"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/warp/settings.toml" "${HOME}/.warp/settings.toml"
-	backup_dotfile_if_needed "${SCRIPT_DIR}/config/dotfiles/example.conf" "${HOME}/.config/dotfiles/example.conf"
 }
 
 trust_mise_config() {

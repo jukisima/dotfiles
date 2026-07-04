@@ -1,7 +1,6 @@
 # dotfiles
 
-この構成は macOS 向けの standalone な dotfiles です。Nix / Home Manager
-ではなく、Homebrew と `mise` を使ってツール導入と設定反映を行います。
+この構成は macOS 向けの standalone な dotfiles です。Homebrew と `mise` を使ってツール導入と設定反映を行います。
 
 ## files
 
@@ -14,7 +13,6 @@
 - `config/starship.toml`: starship 設定
 - `config/vscode/settings.json`: VS Code の user settings
 - `config/warp/settings.toml`: Warp の settings
-- `config/dotfiles/example.conf`: repo に置いたまま配るサンプル dotfile
 
 ## bootstrap
 
@@ -51,12 +49,14 @@ brew services start syncthing
 ## what this setup does
 
 - Homebrew で `fdupes`、`helix`、`ripgrep`、`rsync`、`shfmt`、`starship`、
-  `syncthing`、`typst`、`zoxide` と zsh plugin 用 formula を入れる
+  `syncthing`、`typst`、`winetricks`、`zoxide`、`libyaml`、
+  `pkgconf` と zsh plugin 用 formula を入れる
 - Homebrew で `mise` を入れる
-- Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、`zed` を入れる
+- Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、
+  `wine-stable`、`zed` を入れる
 - Homebrew cask で `Alegreya`、`JetBrains Mono Nerd Font`、`Libertinus Math`、`LXGW WenKai TC`、`Noto Serif Hentaigana`、`Shippori Mincho` を入れる
 - `config/mise/config.toml` の global tool 設定で `deno`、`java`、`node`、
-  `purescript`、`mystmd`、`purty`、`spago` を使えるようにする
+  `purescript`、`ruby`、`mystmd`、`purty`、`spago` を使えるようにする
 - repo の `config/` 配下を `mise dotfiles` でホームディレクトリへ symlink する
 - `~/.gitconfig` で `init.defaultBranch = main` を設定する
 - zsh では `mise activate`、`zoxide`、`starship`、completion、
@@ -104,6 +104,8 @@ source を足します。
   を付けて実行します
 - `config/mise/config.toml` は `~/.config/mise/config.toml` に symlink されるので、
   repo の外でも同じ `mise` tool 設定を使えます
+- `ruby` を `mise` で入れるときは `psych` extension のために `libyaml` と
+  `pkgconf` が必要なので、この repo では `Brewfile` に含めています
 - `mise dotfiles` は symlink モードで使っているので、VS Code や Warp からの編集も
   repo 側にそのまま反映されます
 - この repo / `setup.sh` は apple silicon macOS での利用を前提にしていて、
