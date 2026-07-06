@@ -52,8 +52,8 @@ brew services start syncthing
   `syncthing`、`typst`、`winetricks`、`zoxide`、`libyaml`、
   `pkgconf` と zsh plugin 用 formula を入れる
 - Homebrew で `mise` を入れる
-- Homebrew cask で `codex-app`、`google-chrome`、`visual-studio-code`、`warp`、
-  `wine-stable`、`zed` を入れる
+- Homebrew cask で `codex-app`、`game-porting-toolkit`、
+  `google-chrome`、`visual-studio-code`、`warp`、`wine-stable`、`zed` を入れる
 - Homebrew cask で `Alegreya`、`JetBrains Mono Nerd Font`、`Libertinus Math`、`LXGW WenKai TC`、`Noto Serif Hentaigana`、`Shippori Mincho` を入れる
 - `config/mise/config.toml` の global tool 設定で `deno`、`java`、`node`、
   `purescript`、`ruby`、`mystmd`、`purty`、`spago` を使えるようにする

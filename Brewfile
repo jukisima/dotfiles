@@ -1,3 +1,5 @@
+tap "gcenx/wine"
+
 brew "fdupes"
 brew "helix"
 brew "libyaml"
@@ -29,6 +31,7 @@ cask "font-noto-serif-hentaigana"
 cask "font-noto-serif-tc"
 cask "font-shippori-mincho"
 cask "codex-app"
+cask "gcenx/wine/game-porting-toolkit"
 cask "google-chrome"
 cask "visual-studio-code"
 cask "warp"
