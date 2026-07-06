@@ -7,6 +7,7 @@
 - `setup.sh`: 初期セットアップと再反映
 - `Brewfile`: Homebrew で入れる formula / cask
 - `mise.toml`: `mise dotfiles` 用の dotfiles 定義
+- `config/codex/config.toml`: Codex の設定
 - `config/mise/config.toml`: global に使う `mise` の tools 定義
 - `config/zsh/.zprofile`: Homebrew と `~/.local/bin` の PATH
 - `config/zsh/.zshrc`: zsh の共通設定
@@ -53,11 +54,12 @@ brew services start syncthing
   `pkgconf` と zsh plugin 用 formula を入れる
 - Homebrew で `mise` を入れる
 - Homebrew cask で `codex-app`、`game-porting-toolkit`、
-  `google-chrome`、`visual-studio-code`、`warp`、`wine-stable`、`zed` を入れる
+  `google-chrome`、`visual-studio-code`、`warp`、`zed` を入れる
 - Homebrew cask で `Alegreya`、`JetBrains Mono Nerd Font`、`Libertinus Math`、`LXGW WenKai TC`、`Noto Serif Hentaigana`、`Shippori Mincho` を入れる
 - `config/mise/config.toml` の global tool 設定で `deno`、`java`、`node`、
   `purescript`、`ruby`、`mystmd`、`purty`、`spago` を使えるようにする
 - repo の `config/` 配下を `mise dotfiles` でホームディレクトリへ symlink する
+- `~/.codex/config.toml` で Codex の設定を反映する
 - `~/.gitconfig` で `init.defaultBranch = main` を設定する
 - zsh では `mise activate`、`zoxide`、`starship`、completion、
   autosuggestion、syntax highlighting、history substring search を有効化する

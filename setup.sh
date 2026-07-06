@@ -86,6 +86,7 @@ backup_dotfile_if_needed() {
 
 backup_existing_dotfiles() {
 	log "backing up conflicting dotfiles before applying symlinks"
+	backup_dotfile_if_needed "${SCRIPT_DIR}/config/codex/config.toml" "${HOME}/.codex/config.toml"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/git/.gitconfig" "${HOME}/.gitconfig"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zprofile" "${HOME}/.zprofile"
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/zsh/.zshrc" "${HOME}/.zshrc"

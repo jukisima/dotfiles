@@ -4,10 +4,11 @@ min_version = "2026.6.13"
 dotfiles.default_mode = "symlink"
 
 [dotfiles]
-"~/.gitconfig" = { source = "config/git/.gitconfig", mode = "symlink" }
-"~/.zprofile" = { source = "config/zsh/.zprofile", mode = "symlink" }
-"~/.zshrc" = { source = "config/zsh/.zshrc", mode = "symlink" }
-"~/.config/mise/config.toml" = { source = "config/mise/config.toml", mode = "symlink" }
-"~/.config/starship.toml" = { source = "config/starship.toml", mode = "symlink" }
-"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json", mode = "symlink" }
-"~/.warp/settings.toml" = { source = "config/warp/settings.toml", mode = "symlink" }
+"~/.codex/config.toml" = { source = "config/codex/config.toml" }
+"~/.gitconfig" = { source = "config/git/.gitconfig" }
+"~/.zprofile" = { source = "config/zsh/.zprofile" }
+"~/.zshrc" = { source = "config/zsh/.zshrc" }
+"~/.config/mise/config.toml" = { source = "config/mise/config.toml" }
+"~/.config/starship.toml" = { source = "config/starship.toml" }
+"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
+"~/.warp/settings.toml" = { source = "config/warp/settings.toml" }
