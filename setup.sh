@@ -6,6 +6,9 @@ readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly BREWFILE="${SCRIPT_DIR}/Brewfile"
 readonly MISE_CONFIG_FILE="${SCRIPT_DIR}/mise.toml"
 readonly BACKUP_SUFFIX="$(date +%Y%m%d%H%M%S)"
+readonly TRUSTED_BREW_TAPS=(
+	"gcenx/wine"
+)
 
 log() {
 	printf '==> %s\n' "$*"
@@ -35,6 +38,19 @@ install_homebrew() {
 source_homebrew() {
 	[[ -x /opt/homebrew/bin/brew ]] || die "homebrew was installed, but /opt/homebrew/bin/brew is not available."
 	eval "$(/opt/homebrew/bin/brew shellenv)"
+}
+
+trust_brew_taps() {
+	local tap
+
+	if ! brew help trust >/dev/null 2>&1; then
+		return
+	fi
+
+	for tap in "${TRUSTED_BREW_TAPS[@]}"; do
+		log "trusting homebrew tap ${tap}"
+		brew trust --tap "${tap}"
+	done
 }
 
 install_brew_packages() {
@@ -121,6 +137,7 @@ main() {
 	cd "${SCRIPT_DIR}"
 	install_homebrew
 	source_homebrew
+	trust_brew_taps
 	install_brew_packages
 	trust_mise_config
 	backup_existing_dotfiles
