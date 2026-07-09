@@ -7,7 +7,7 @@ readonly BREWFILE="${SCRIPT_DIR}/Brewfile"
 readonly MISE_CONFIG_FILE="${SCRIPT_DIR}/mise.toml"
 readonly BACKUP_SUFFIX="$(date +%Y%m%d%H%M%S)"
 readonly TRUSTED_BREW_TAPS=(
-	"gcenx/wine"
+	"sikarugir-app/sikarugir"
 )
 
 log() {
