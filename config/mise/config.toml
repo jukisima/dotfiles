@@ -3,6 +3,7 @@ deno = "latest"
 java = "latest"
 node = "latest"
 purescript = "latest"
+python = "latest"
 ruby = "latest"
 "npm:purty" = { version = "latest", depends = "node" }
 "npm:spago" = { version = "latest", depends = "node" }
