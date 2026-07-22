@@ -12,3 +12,14 @@ dotfiles.default_mode = "symlink"
 "~/.config/starship.toml" = { source = "config/starship.toml" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
 "~/.warp/settings.toml" = { source = "config/warp/settings.toml" }
+
+[tools]
+deno = "latest"
+java = "latest"
+node = "latest"
+purescript = "latest"
+python = "latest"
+ruby = "latest"
+"npm:purty" = { version = "latest", depends = "node" }
+"npm:spago" = { version = "latest", depends = "node" }
+"npm:mystmd" = { version = "latest", depends = "node" }

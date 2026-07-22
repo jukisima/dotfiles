@@ -34,3 +34,7 @@ fi
 if [[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
 	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+source ~/.cargo/env

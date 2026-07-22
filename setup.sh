@@ -5,10 +5,9 @@ set -euo pipefail
 readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly BREWFILE="${SCRIPT_DIR}/Brewfile"
 readonly MISE_CONFIG_FILE="${SCRIPT_DIR}/mise.toml"
+readonly MISE_GLOBAL_CONFIG_FILE="${SCRIPT_DIR}/config/mise/config.toml"
 readonly BACKUP_SUFFIX="$(date +%Y%m%d%H%M%S)"
-readonly TRUSTED_BREW_TAPS=(
-	"sikarugir-app/sikarugir"
-)
+readonly TRUSTED_BREW_TAP="sikarugir-app/sikarugir"
 
 log() {
 	printf '==> %s\n' "$*"
@@ -19,14 +18,8 @@ die() {
 	exit 1
 }
 
-ensure_macos() {
-	[[ "$(uname -s)" == "Darwin" ]] || die "this bootstrap currently supports macOS only."
-}
-
 install_homebrew() {
-	if command -v brew >/dev/null 2>&1; then
-		return
-	fi
+	command -v brew >/dev/null 2>&1 && return
 
 	command -v curl >/dev/null 2>&1 || die "curl is required to install homebrew."
 
@@ -35,22 +28,10 @@ install_homebrew() {
 		"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
-source_homebrew() {
-	[[ -x /opt/homebrew/bin/brew ]] || die "homebrew was installed, but /opt/homebrew/bin/brew is not available."
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-}
-
 trust_brew_taps() {
-	local tap
-
-	if ! brew help trust >/dev/null 2>&1; then
-		return
-	fi
-
-	for tap in "${TRUSTED_BREW_TAPS[@]}"; do
-		log "trusting homebrew tap ${tap}"
-		brew trust --tap "${tap}"
-	done
+	brew help trust >/dev/null 2>&1 || return
+	log "trusting homebrew tap ${TRUSTED_BREW_TAP}"
+	brew trust --tap "${TRUSTED_BREW_TAP}"
 }
 
 install_brew_packages() {
@@ -61,14 +42,6 @@ install_brew_packages() {
 
 	printf 'warning: brew bundle reported one or more failed dependencies; continuing setup.\n' >&2
 	printf 'warning: rerun `brew bundle --file %s` later to retry skipped installs.\n' "${BREWFILE}" >&2
-}
-
-backup_path() {
-	local target="$1"
-	local backup="${target}.backup-${BACKUP_SUFFIX}"
-
-	log "backing up ${target} to ${backup}"
-	mv "$target" "$backup"
 }
 
 resolve_symlink_target() {
@@ -96,7 +69,9 @@ backup_dotfile_if_needed() {
 	fi
 
 	if [[ -e "${target}" || -L "${target}" ]]; then
-		backup_path "${target}"
+		local backup="${target}.backup-${BACKUP_SUFFIX}"
+		log "backing up ${target} to ${backup}"
+		mv "${target}" "${backup}"
 	fi
 }
 
@@ -112,38 +87,38 @@ backup_existing_dotfiles() {
 	backup_dotfile_if_needed "${SCRIPT_DIR}/config/warp/settings.toml" "${HOME}/.warp/settings.toml"
 }
 
-trust_mise_config() {
-	log "trusting ${MISE_CONFIG_FILE}"
-	mise trust "${MISE_CONFIG_FILE}"
-}
+verify_mise_java() {
+	local java_path
 
-install_mise_tools() {
-	log "installing mise-managed tools"
-	mise install
-}
-
-apply_dotfiles() {
-	log "applying repo-managed dotfiles"
-	MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
-}
-
-start_syncthing() {
-	log "starting syncthing with brew services"
-	brew services start syncthing >/dev/null
+	java_path="$(mise which java)" || die "mise Java is installed but not globally active."
+	[[ -x "${java_path}" ]] || die "mise resolved Java to a non-executable path: ${java_path}"
+	"${java_path}" -version
+	log "mise Java is globally active at ${java_path}"
 }
 
 main() {
-	ensure_macos
+	[[ "$(uname -s)" == "Darwin" ]] || die "this bootstrap currently supports macOS only."
+	[[ -f "${MISE_GLOBAL_CONFIG_FILE}" ]] || die "missing repo-managed mise config: ${MISE_GLOBAL_CONFIG_FILE}"
+
 	cd "${SCRIPT_DIR}"
 	install_homebrew
-	source_homebrew
+	[[ -x /opt/homebrew/bin/brew ]] || die "homebrew was installed, but /opt/homebrew/bin/brew is not available."
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
 	trust_brew_taps
 	install_brew_packages
-	trust_mise_config
+
+	log "trusting ${MISE_CONFIG_FILE}"
+	mise trust "${MISE_CONFIG_FILE}"
 	backup_existing_dotfiles
-	apply_dotfiles
-	install_mise_tools
-	start_syncthing
+	log "applying repo-managed dotfiles"
+	MISE_EXPERIMENTAL=1 mise dotfiles apply --yes
+	log "installing mise-managed tools"
+	mise install
+	verify_mise_java
+
+	log "starting syncthing with brew services"
+	brew services start syncthing >/dev/null
 
 	log "done"
 	log "open a new shell to pick up homebrew and mise shell integration."
