@@ -20,6 +20,8 @@ node = "latest"
 purescript = "latest"
 python = "latest"
 ruby = "latest"
+"npm:oxfmt" = { version = "latest", depends = "node" }
+"npm:oxlint" = { version = "latest", depends = "node" }
 "npm:purty" = { version = "latest", depends = "node" }
 "npm:spago" = { version = "latest", depends = "node" }
 "npm:mystmd" = { version = "latest", depends = "node" }

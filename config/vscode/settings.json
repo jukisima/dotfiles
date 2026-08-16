@@ -66,7 +66,7 @@
     "%DOCFILE%.nav",
     "%DOCFILE%.vrb"
   ],
-  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans Mono', 'Noto Sans TC', monospace",
+  "editor.fontFamily": "JuliaMono, 'JetBrainsMono Nerd Font', 'Noto Sans Mono', 'Noto Sans TC', monospace",
   "liveServer.settings.donotVerifyTags": true,
   "latex-workshop.latex.build.clearLog.everyRecipeStep.enabled": false,
   "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
@@ -217,5 +217,11 @@
   "[flix]": {
     "editor.defaultFormatter": "flix.flix"
   },
-  "deno.enable": true
+  "deno.enable": true,
+  "haskell.formattingProvider": "fourmolu",
+  "[tung]": {
+    "editor.defaultFormatter": "tung.tung-vscode"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.editor.enablePreview": false
 }

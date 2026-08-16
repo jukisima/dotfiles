@@ -7,7 +7,6 @@ readonly BREWFILE="${SCRIPT_DIR}/Brewfile"
 readonly MISE_CONFIG_FILE="${SCRIPT_DIR}/mise.toml"
 readonly MISE_GLOBAL_CONFIG_FILE="${SCRIPT_DIR}/config/mise/config.toml"
 readonly BACKUP_SUFFIX="$(date +%Y%m%d%H%M%S)"
-readonly TRUSTED_BREW_TAP="sikarugir-app/sikarugir"
 
 log() {
 	printf '==> %s\n' "$*"
@@ -26,12 +25,6 @@ install_homebrew() {
 	log "installing homebrew"
 	NONINTERACTIVE=1 /bin/bash -c \
 		"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-
-trust_brew_taps() {
-	brew help trust >/dev/null 2>&1 || return
-	log "trusting homebrew tap ${TRUSTED_BREW_TAP}"
-	brew trust --tap "${TRUSTED_BREW_TAP}"
 }
 
 install_brew_packages() {
@@ -105,7 +98,6 @@ main() {
 	[[ -x /opt/homebrew/bin/brew ]] || die "homebrew was installed, but /opt/homebrew/bin/brew is not available."
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 
-	trust_brew_taps
 	install_brew_packages
 
 	log "trusting ${MISE_CONFIG_FILE}"
