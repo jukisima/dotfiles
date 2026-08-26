@@ -1,4 +1,61 @@
-min_version = "2026.6.13"
+min_version = "2026.8.14"
+
+[bootstrap.brew]
+adopt = true
+
+[bootstrap.packages]
+"brew:eza" = "latest"
+"brew:fdupes" = "latest"
+"brew:ghcup" = "latest"
+"brew:helix" = "latest"
+"brew:libyaml" = "latest"
+"brew:pkgconf" = "latest"
+"brew:ripgrep" = "latest"
+"brew:rocq" = "latest"
+"brew:rustup" = "latest"
+"brew:sheldon" = "latest"
+"brew:shfmt" = "latest"
+"brew:starship" = "latest"
+"brew:typst" = "latest"
+"brew:winetricks" = "latest"
+"brew:zoxide" = "latest"
+"brew:zsh-autosuggestions" = "latest"
+"brew:zsh-history-substring-search" = "latest"
+"brew:zsh-syntax-highlighting" = "latest"
+
+"brew-cask:font-jetbrains-mono-nerd-font" = "latest"
+"brew-cask:font-alegreya" = "latest"
+"brew-cask:font-gnu-unifont" = "latest"
+"brew-cask:font-juliamono" = "latest"
+"brew-cask:font-libertinus-math" = "latest"
+"brew-cask:font-lxgw-wenkai-tc" = "latest"
+"brew-cask:font-nanum-myeongjo" = "latest"
+#"brew-cask:font-noto-kufi-arabic" = "latest"
+#"brew-cask:font-noto-naskh-arabic" = "latest"
+"brew-cask:font-noto-sans" = "latest"
+#"brew-cask:font-noto-sans-armenian" = "latest"
+#"brew-cask:font-noto-sans-tc" = "latest"
+"brew-cask:font-noto-serif" = "latest"
+#"brew-cask:font-noto-serif-hentaigana" = "latest"
+#"brew-cask:font-noto-serif-tc" = "latest"
+"brew-cask:font-shippori-mincho" = "latest"
+"brew-cask:font-noto-sans-psalter-pahlavi" = "latest"
+
+"brew-cask:anki" = "latest"
+"brew-cask:brave-browser" = "latest"
+"brew-cask:calibre" = "latest"
+"brew-cask:codex" = "latest"
+"brew-cask:discord" = "latest"
+"brew-cask:element" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:iina" = "latest"
+"brew-cask:kobo" = "latest"
+"brew-cask:obs" = "latest"
+"brew-cask:session" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:steam" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:zotero" = "latest"
 
 [settings]
 dotfiles.default_mode = "symlink"
@@ -6,9 +63,9 @@ dotfiles.default_mode = "symlink"
 [dotfiles]
 "~/.codex/config.toml" = { source = "config/codex/config.toml" }
 "~/.gitconfig" = { source = "config/git/.gitconfig" }
-"~/.zprofile" = { source = "config/zsh/.zprofile" }
 "~/.zshrc" = { source = "config/zsh/.zshrc" }
 "~/.config/mise/config.toml" = { source = "config/mise/config.toml" }
+"~/.config/sheldon/plugins.toml" = { source = "config/sheldon/plugins.toml" }
 "~/.config/starship.toml" = { source = "config/starship.toml" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
 "~/.warp/settings.toml" = { source = "config/warp/settings.toml" }

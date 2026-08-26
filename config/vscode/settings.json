@@ -223,5 +223,6 @@
     "editor.defaultFormatter": "tung.tung-vscode"
   },
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editor.enablePreview": false
+  "workbench.editor.enablePreview": false,
+  "makefile.configureOnOpen": true
 }
