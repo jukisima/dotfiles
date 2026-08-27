@@ -66,7 +66,7 @@
     "%DOCFILE%.nav",
     "%DOCFILE%.vrb"
   ],
-  "editor.fontFamily": "JuliaMono, 'JetBrainsMono Nerd Font', 'Noto Sans Mono', 'Noto Sans TC', monospace",
+  "editor.fontFamily": "JuliaMono, 'JetBrainsMono Nerd Font', 'Noto Sans Mono', 'Noto Sans TC', 'Noto Sans', monospace",
   "liveServer.settings.donotVerifyTags": true,
   "latex-workshop.latex.build.clearLog.everyRecipeStep.enabled": false,
   "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
@@ -224,5 +224,8 @@
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.editor.enablePreview": false,
-  "makefile.configureOnOpen": true
+  "makefile.configureOnOpen": true,
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  }
 }

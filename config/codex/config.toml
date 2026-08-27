@@ -5,14 +5,16 @@ model_reasoning_effort = "high"
 service_tier = "default"
 personality = "pragmatic"
 
-notify = ["~/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+notify = [
+  "~/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
+  "turn-ended",
+]
 
 [marketplaces.openai-bundled]
 source_type = "local"
 source = "~/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-08-19T23:24:24Z"
 source_type = "local"
 source = "~/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
