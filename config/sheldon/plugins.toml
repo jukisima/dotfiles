@@ -1,7 +1,5 @@
 shell = "zsh"
 
-[plugins]
-
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
