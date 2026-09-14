@@ -1,28 +1,15 @@
-min_version = "2026.8.14"
+min_version = "2026.9.7"
 
 [bootstrap.brew]
 adopt = true
 
 [bootstrap.packages]
-"brew:eza" = "latest"
 "brew:fdupes" = "latest"
-"brew:fourmolu" = "latest"
-"brew:ghcup" = "latest"
-"brew:helix" = "latest"
 "brew:idris2" = "latest"
-"brew:lefthook" = "latest"
 "brew:libyaml" = "latest"
 "brew:pkgconf" = "latest"
-"brew:ripgrep" = "latest"
-"brew:rocq" = "latest"
-"brew:rustup" = "latest"
 "brew:sheldon" = "latest"
-"brew:shfmt" = "latest"
-"brew:starship" = "latest"
-"brew:taplo" = "latest"
-"brew:typst" = "latest"
 "brew:winetricks" = "latest"
-"brew:zoxide" = "latest"
 "brew:zsh-autosuggestions" = "latest"
 "brew:zsh-history-substring-search" = "latest"
 "brew:zsh-syntax-highlighting" = "latest"
@@ -93,14 +80,35 @@ dotfiles.default_mode = "symlink"
 [tools]
 deno = "latest"
 dotnet = "latest"
+eza = "latest"
+ghcup = "latest"
+gleam = "latest"
+helix = "latest"
+lefthook = "latest"
 java = "latest"
 node = "latest"
 opam = "latest"
 purescript = "latest"
 python = "latest"
+ripgrep = "latest"
 ruby = "latest"
-"npm:oxfmt" = { version = "latest", depends = "node" }
-"npm:oxlint" = { version = "latest", depends = "node" }
-"npm:purty" = { version = "latest", depends = "node" }
-"npm:spago" = { version = "latest", depends = "node" }
+rust = "latest"
+starship = "latest"
+sheldon = "latest"
+shfmt = "latest"
+taplo = "latest"
+typst = "latest"
+zoxide = "latest"
+oxfmt = "latest"
+oxlint = "latest"
+purty = "latest"
+spago = "latest"
 "npm:mystmd" = { version = "latest", depends = "node" }
+
+[tasks.bootstrap]
+description = "opam and ghcup"
+run = """
+opam switch import opam.export
+ghcup install ghc 9.14.1
+ghcup install hls 2.14.0.0
+"""

@@ -1,3 +1,7 @@
+typeset -U path
+path=("$HOME/.local/bin" /opt/homebrew/bin /opt/homebrew/sbin $path)
+export PATH
+
 eval "$(~/.local/bin/mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(sheldon source)"
@@ -6,8 +10,8 @@ eval "$(zoxide init zsh)"
 autoload -U compinit
 compinit
 
-source "$HOME/.ghcup/env"
-source ~/.cargo/env
+[[ ! -r "$HOME/.ghcup/env" ]] || source "$HOME/.ghcup/env"
+[[ ! -r "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
 
 export EDITOR="hx"
 export VISUAL="hx"
