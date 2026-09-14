@@ -2,108 +2,14 @@
   "workbench.colorTheme": "Monokai",
   "trailing-spaces.trimOnSave": true,
   "redhat.telemetry.enabled": true,
-  "editor.tabSize": 2,
   "svg.preview.mode": "svg",
-  "latex-workshop.latex.autoClean.run": "onSucceeded",
-  "latex-workshop.latex.recipes": [
-    {
-      "name": "batch compile",
-      "tools": [
-        "lualatex",
-        "lualatex",
-        "lualatex"
-      ]
-    }
-  ],
-  "latex-workshop.latex.tools": [
-    {
-      "name": "lualatex",
-      "command": "lualatex",
-      "args": [
-        "--cmdx",
-        "-file-line-error",
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "%DOC%"
-      ]
-    },
-    {
-      "name": "biber",
-      "command": "biber",
-      "args": [
-        "-u",
-        "-U",
-        "--output-safechars",
-        "%DOCFILE%"
-      ]
-    }
-  ],
-  "latex-workshop.latex.autoBuild.run": "onSave",
-  "latex-workshop.latex.clean.fileTypes": [
-    "%DOCFILE%.aux",
-    "%DOCFILE%.bbl",
-    "%DOCFILE%.bcf",
-    "%DOCFILE%.blg",
-    "%DOCFILE%.idx",
-    "%DOCFILE%.ind",
-    "%DOCFILE%.lof",
-    "%DOCFILE%.lot",
-    "%DOCFILE%.out",
-    "%DOCFILE%.toc",
-    "%DOCFILE%.acn",
-    "%DOCFILE%.acr",
-    "%DOCFILE%.alg",
-    "%DOCFILE%.glg",
-    "%DOCFILE%.glo",
-    "%DOCFILE%.gls",
-    "%DOCFILE%.fls",
-    "%DOCFILE%.log",
-    "%DOCFILE%.fdb_latexmk",
-    "%DOCFILE%.run.xml",
-    "%DOCFILE%.snm",
-    "%DOCFILE%.synctex.gz",
-    "%DOCFILE%.thm",
-    "%DOCFILE%.nav",
-    "%DOCFILE%.vrb"
-  ],
   "editor.fontFamily": "JuliaMono, 'JetBrainsMono Nerd Font', 'Noto Sans TC', 'Noto Sans Avestan', 'Noto Sans Mono', 'Noto Sans', monospace",
   "liveServer.settings.donotVerifyTags": true,
-  "latex-workshop.latex.build.clearLog.everyRecipeStep.enabled": false,
-  "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
-  "[ruby]": {
-    "editor.defaultFormatter": "Shopify.ruby-lsp",
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.tabSize": 2,
-    "editor.insertSpaces": true,
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "editor.rulers": [
-      120
-    ],
-    "editor.semanticHighlighting.enabled": true
-  },
   "[css]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "javascript.preferences.quoteStyle": "single",
-  "prisma.showPrismaDataPlatformNotification": false,
-  "editor.defaultFormatter": "rheller.alive",
-  "alive.lsp.startCommand": [
-    "sbcl",
-    "--eval",
-    "(require :asdf)",
-    "--eval",
-    "(asdf:load-system :alive-lsp)",
-    "--eval",
-    "(alive/server:start)"
-  ],
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[latex]": {
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
   },
   "[javascript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
@@ -115,7 +21,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "editor.unicodeHighlight.ambiguousCharacters": false,
   "[html]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
@@ -127,11 +32,6 @@
   },
   "[fsharp]": {
     "editor.defaultFormatter": "Ionide.Ionide-fsharp"
-  },
-  "files.watcherExclude": {
-    "**/.bloop": true,
-    "**/.metals": true,
-    "**/.ammonite": true
   },
   "[scala]": {
     "editor.defaultFormatter": "scalameta.metals"
@@ -157,7 +57,6 @@
     "editor.defaultFormatter": "vknabel.vscode-apple-swift-format"
   },
   "diffEditor.experimental.showMoves": true,
-  "terminal.integrated.fontFamily": "MesloLGS NF",
   "diffEditor.codeLens": true,
   "workbench.editorAssociations": {
     "*.svg": "default"
@@ -198,9 +97,6 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "chat.tools.terminal.autoApprove": {
-    "runhaskell": true
-  },
   "oxc.typeAware": true,
   "claudeCode.preferredLocation": "panel",
   "[scss]": {
