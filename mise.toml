@@ -6,8 +6,6 @@ adopt = true
 [bootstrap.packages]
 "brew:fdupes" = "latest"
 "brew:idris2" = "latest"
-"brew:libyaml" = "latest"
-"brew:pkgconf" = "latest"
 "brew:sheldon" = "latest"
 "brew:winetricks" = "latest"
 "brew:zsh-autosuggestions" = "latest"
@@ -69,41 +67,13 @@ dotfiles.default_mode = "symlink"
 
 [dotfiles]
 "~/.codex/config.toml" = { source = "config/codex/config.toml" }
-"~/.gitconfig" = { source = "config/git/.gitconfig" }
-"~/.zshrc" = { source = "config/zsh/.zshrc" }
 "~/.config/mise/config.toml" = { source = "config/mise/config.toml" }
 "~/.config/sheldon/plugins.toml" = { source = "config/sheldon/plugins.toml" }
 "~/.config/starship.toml" = { source = "config/starship.toml" }
-"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
+"~/.gitconfig" = { source = "config/git/.gitconfig" }
 "~/.warp/settings.toml" = { source = "config/warp/settings.toml" }
-
-[tools]
-deno = "latest"
-dotnet = "latest"
-eza = "latest"
-ghcup = "latest"
-gleam = "latest"
-helix = "latest"
-lefthook = "latest"
-java = "latest"
-node = "latest"
-opam = "latest"
-purescript = "latest"
-python = "latest"
-ripgrep = "latest"
-ruby = "latest"
-rust = "latest"
-starship = "latest"
-sheldon = "latest"
-shfmt = "latest"
-taplo = "latest"
-typst = "latest"
-zoxide = "latest"
-oxfmt = "latest"
-oxlint = "latest"
-purty = "latest"
-spago = "latest"
-"npm:mystmd" = { version = "latest", depends = "node" }
+"~/.zshrc" = { source = "config/zsh/.zshrc" }
+"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
 
 [tasks.bootstrap]
 description = "opam and ghcup"

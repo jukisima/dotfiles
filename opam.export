@@ -128,4 +128,3 @@ installed: [
   "xdg.3.23.1"
   "yojson.3.0.0"
 ]
-pinned: "rocq-core.9.2.0"
