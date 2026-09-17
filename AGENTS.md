@@ -22,8 +22,7 @@ machine. Use this file as the single source of truth for agent-facing guidance.
 - `mise.toml`: bootstrap packages, tools, and dotfile mapping
 - `config/mise/config.toml`: global `mise` tools
 - `config/codex/config.toml`: Codex config
-- `config/zsh/.zprofile`: PATH setup
-- `config/zsh/.zshrc`: shared shell config
+- `config/zsh/.zshrc`: PATH setup and shared interactive shell config
 - `config/starship.toml`: prompt config
 - `config/vscode/settings.json`: VS Code user settings
 - `config/warp/settings.toml`: Warp settings
@@ -56,7 +55,7 @@ machine. Use this file as the single source of truth for agent-facing guidance.
 - Keep host package additions in `mise.toml` under `[bootstrap.packages]`.
 - Keep version-managed tool changes in `config/mise/config.toml` under `[tools]`.
 - Keep dotfile ownership in `mise.toml` under `[dotfiles]`.
-- Keep shell configuration in `config/zsh/.zprofile` and `config/zsh/.zshrc`.
+- Keep shell configuration in `config/zsh/.zshrc`.
 - Keep editor configuration in repo-managed files where practical.
 - VS Code user settings live in `config/vscode/settings.json`.
 - Warp settings live in `config/warp/settings.toml`.

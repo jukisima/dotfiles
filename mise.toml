@@ -1,28 +1,13 @@
-min_version = "2026.8.14"
+min_version = "2026.9.7"
 
 [bootstrap.brew]
 adopt = true
 
 [bootstrap.packages]
-"brew:eza" = "latest"
 "brew:fdupes" = "latest"
-"brew:fourmolu" = "latest"
-"brew:ghcup" = "latest"
-"brew:helix" = "latest"
 "brew:idris2" = "latest"
-"brew:lefthook" = "latest"
-"brew:libyaml" = "latest"
-"brew:pkgconf" = "latest"
-"brew:ripgrep" = "latest"
-"brew:rocq" = "latest"
-"brew:rustup" = "latest"
 "brew:sheldon" = "latest"
-"brew:shfmt" = "latest"
-"brew:starship" = "latest"
-"brew:taplo" = "latest"
-"brew:typst" = "latest"
 "brew:winetricks" = "latest"
-"brew:zoxide" = "latest"
 "brew:zsh-autosuggestions" = "latest"
 "brew:zsh-history-substring-search" = "latest"
 "brew:zsh-syntax-highlighting" = "latest"
@@ -74,6 +59,7 @@ adopt = true
 "brew-cask:obs" = "latest"
 "brew-cask:session" = "latest"
 "brew-cask:spotify" = "latest"
+"brew-cask:stats" = "latest"
 "brew-cask:steam" = "latest"
 "brew-cask:visual-studio-code" = "latest"
 "brew-cask:zotero" = "latest"
@@ -83,24 +69,18 @@ dotfiles.default_mode = "symlink"
 
 [dotfiles]
 "~/.codex/config.toml" = { source = "config/codex/config.toml" }
-"~/.gitconfig" = { source = "config/git/.gitconfig" }
-"~/.zshrc" = { source = "config/zsh/.zshrc" }
 "~/.config/mise/config.toml" = { source = "config/mise/config.toml" }
 "~/.config/sheldon/plugins.toml" = { source = "config/sheldon/plugins.toml" }
 "~/.config/starship.toml" = { source = "config/starship.toml" }
-"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
+"~/.gitconfig" = { source = "config/git/.gitconfig" }
 "~/.warp/settings.toml" = { source = "config/warp/settings.toml" }
+"~/.zshrc" = { source = "config/zsh/.zshrc" }
+"~/Library/Application Support/Code/User/settings.json" = { source = "config/vscode/settings.json" }
 
-[tools]
-deno = "latest"
-java = "latest"
-node = "latest"
-opam = "latest"
-purescript = "latest"
-python = "latest"
-ruby = "latest"
-"npm:oxfmt" = { version = "latest", depends = "node" }
-"npm:oxlint" = { version = "latest", depends = "node" }
-"npm:purty" = { version = "latest", depends = "node" }
-"npm:spago" = { version = "latest", depends = "node" }
-"npm:mystmd" = { version = "latest", depends = "node" }
+[tasks.bootstrap]
+description = "opam and ghcup"
+run = """
+opam switch import opam.export
+ghcup install ghc 9.14.1
+ghcup install hls 2.14.0.0
+"""

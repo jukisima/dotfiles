@@ -123,5 +123,8 @@
   "makefile.configureOnOpen": true,
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[ocaml]": {
+    "editor.defaultFormatter": "ocamllabs.ocaml-platform"
   }
 }
