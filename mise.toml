@@ -58,6 +58,7 @@ adopt = true
 "brew-cask:obs" = "latest"
 "brew-cask:session" = "latest"
 "brew-cask:spotify" = "latest"
+"brew-cask:stats" = "latest"
 "brew-cask:steam" = "latest"
 "brew-cask:visual-studio-code" = "latest"
 "brew-cask:zotero" = "latest"

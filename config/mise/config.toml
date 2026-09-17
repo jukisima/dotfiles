@@ -2,6 +2,7 @@
 deno = "latest"
 dotnet = "latest"
 eza = "latest"
+gh = "latest"
 ghcup = "latest"
 gleam = "latest"
 helix = "latest"
