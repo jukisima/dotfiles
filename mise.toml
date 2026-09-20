@@ -49,7 +49,6 @@ adopt = true
 "brew-cask:calibre" = "latest"
 "brew-cask:codex" = "latest"
 "brew-cask:discord" = "latest"
-"brew-cask:dotnet-sdk" = "latest"
 "brew-cask:element" = "latest"
 "brew-cask:emacs-app" = "latest"
 "brew-cask:ghostty" = "latest"
