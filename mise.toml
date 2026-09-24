@@ -1,4 +1,4 @@
-min_version = "2026.9.7"
+min_version = "2026.9.12"
 
 [bootstrap.brew]
 adopt = true
@@ -7,7 +7,6 @@ adopt = true
 "brew:fdupes" = "latest"
 "brew:idris2" = "latest"
 "brew:sheldon" = "latest"
-"brew:winetricks" = "latest"
 "brew:zsh-autosuggestions" = "latest"
 "brew:zsh-history-substring-search" = "latest"
 "brew:zsh-syntax-highlighting" = "latest"
@@ -53,6 +52,7 @@ adopt = true
 "brew-cask:emacs-app" = "latest"
 "brew-cask:ghostty" = "latest"
 "brew-cask:iina" = "latest"
+"brew-cask:intellij-idea" = "latest"
 #"brew-cask:isabelle" = "latest"
 "brew-cask:kobo" = "latest"
 "brew-cask:obs" = "latest"
