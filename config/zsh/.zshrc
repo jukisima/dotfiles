@@ -1,5 +1,5 @@
 typeset -U path
-path=("$HOME/.local/bin" /opt/homebrew/bin /opt/homebrew/sbin $path)
+path=("$HOME/.local/bin" "$HOME/.ghcup/bin" /opt/homebrew/bin /opt/homebrew/sbin $path)
 export PATH
 
 eval "$(~/.local/bin/mise activate zsh)"
@@ -15,7 +15,6 @@ compinit
 
 export EDITOR="hx"
 export VISUAL="hx"
-
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
